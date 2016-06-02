@@ -96,6 +96,11 @@
 
 <script>
 
+function goLogin(){
+	self.location ="/user/login";
+}
+
+
 var template = Handlebars.compile($("#template").html());
 
 $(".fileDrop").on("dragenter dragover", function(event){

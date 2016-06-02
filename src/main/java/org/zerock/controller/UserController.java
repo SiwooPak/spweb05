@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +23,8 @@ import org.zerock.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	private static Logger logger =  LoggerFactory.getLogger(UserController.class);
 
   @Inject
   private UserService service;
@@ -67,26 +71,33 @@ public class UserController {
   }
 
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
-  public void logout(HttpServletRequest request, 
+  public String logout(HttpServletRequest request, 
       HttpServletResponse response, HttpSession session) throws Exception {
 
-    Object obj = session.getAttribute("login");
+	  logger.info("logout.................................1");
 
-    if (obj != null) {
-      UserVO vo = (UserVO) obj;
+	  Object obj = session.getAttribute("login");
 
-      session.removeAttribute("login");
-      session.invalidate();
+	  if (obj != null) {
+	  UserVO vo = (UserVO) obj;
+	  logger.info("logout.................................2");
+	  session.removeAttribute("login");
+	  session.invalidate();
 
-      Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+	  logger.info("logout.................................3");
+	  Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 
-      if (loginCookie != null) {
-        loginCookie.setPath("/");
-        loginCookie.setMaxAge(0);
-        response.addCookie(loginCookie);
-        service.keepLogin(vo.getUid(), session.getId(), new Date());
-      }
-    }
+
+	  if (loginCookie != null) {
+	  logger.info("logout.................................4");
+	  loginCookie.setPath("/");
+	  loginCookie.setMaxAge(0);
+	  response.addCookie(loginCookie);
+	  service.keepLogin(vo.getUid(), session.getId(), new Date());
+	  }
+	  } 
+
+	  return "user/logout";
   }
 
 }

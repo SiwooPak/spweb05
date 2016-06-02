@@ -237,10 +237,7 @@
 
 	}
 
-	var bno = $
-	{
-		boardVO.bno
-	};
+	var bno = ${ boardVO.bno};
 
 	var replyPage = 1;
 
@@ -323,7 +320,7 @@
 					alert("등록 되었습니다.");
 					replyPage = 1;
 					getPage("/replies/" + bno + "/" + replyPage);
-					replyerObj.val("");
+					//replyerObj.val("");
 					replytextObj.val("");
 				}
 			}
@@ -483,6 +480,12 @@ $(document).ready(function(){
 		
 	
 });
+
+
+function goLogin(){
+	self.location ="/user/login";
+}
+
 </script>
 
 
