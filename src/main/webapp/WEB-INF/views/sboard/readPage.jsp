@@ -420,14 +420,24 @@ $(document).ready(function(){
 			 arr.push($(this).attr("data-src"));
 		});
 		
-		if(arr.length > 0){
+		console.log(arr);
+	 	if(arr.length > 0){
 			$.post("/deleteAllFiles",{files:arr}, function(){
 				
+				formObj.attr("action", "/sboard/removePage");
+				formObj.submit();
+				
 			});
+		}else{
+			
+			formObj.attr("action", "/sboard/removePage");
+			formObj.submit();
 		}
 		
+	 	/*
 		formObj.attr("action", "/sboard/removePage");
 		formObj.submit();
+		 */
 	});	
 	
 	$("#goListBtn ").on("click", function(){
