@@ -23,7 +23,7 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">REGISTER BOARD</h3>
+					<h3 class="box-title">REGISTER BOARD ${login }</h3>
 				</div>
 				<!-- /.box-header -->
 
@@ -39,10 +39,13 @@
 				placeholder="Enter ..."></textarea>
 		</div>
 		
+		
+		
+		
 		<div class="form-group">
 			<label for="exampleInputEmail1">Writer</label> 
 			<input type="text" name="writer" 
-			  class="form-control" value=''${login.uid }' readonly>
+			  class="form-control"  value="${login.uid }" readonly>
 		</div>
 
 		<div class="form-group">
