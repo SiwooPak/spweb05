@@ -1,5 +1,10 @@
 package org.zerock.interceptor;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +40,29 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         logger.info("remember me................");
         Cookie loginCookie = new Cookie("loginCookie", session.getId());
-        loginCookie.setPath("/");
-        loginCookie.setMaxAge(60 * 60 * 24 * 7);
-        response.addCookie(loginCookie);
+        //loginCookie.setDomain("www.zerock.com");
+        
+//        loginCookie.setPath("/");
+//        loginCookie.setMaxAge(60 * 60 * 24 * 7);
+//        loginCookie.setMaxAge(60 * 10);
+//        loginCookie.setHttpOnly(true);
+//        loginCookie.setSecure(false);
+//        response.addCookie(loginCookie);
+        
+        int expiration = 7*24*60*60;
+        StringBuilder cookieString = new StringBuilder("loginCookie="+session.getId()+"; ");
+
+        DateFormat df = new SimpleDateFormat("EEE, dd-MMM-yyyy HH:mm:ss 'GMT'", Locale.US);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, expiration);
+        cookieString.append("Expires=" + df.format(cal.getTime()) + "; ");
+        //cookieString.append("Domain="+request.getServerName()+"; ");
+        cookieString.append("Version=0; ");
+        cookieString.append("Path=/; ");
+        cookieString.append("Max-Age=" + expiration + "; ");
+        cookieString.append("HttpOnly");
+        response.addHeader("Set-Cookie", cookieString.toString());
+        
       }
       // response.sendRedirect("/");
       Object dest = session.getAttribute("dest");

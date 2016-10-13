@@ -29,14 +29,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
     if(session.getAttribute("login") == null){
     
+      logger.info("session get attributes is null");
       logger.info("current user is not logined");
       
       saveDest(request);
       
       Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
       
+      logger.info("loginCookie check "+  loginCookie);
+      
       if(loginCookie != null) { 
         
+    	  
         UserVO userVO = service.checkLoginBefore(loginCookie.getValue());
         
         logger.info("USERVO: " + userVO);

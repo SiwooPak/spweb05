@@ -82,6 +82,9 @@ public class UserController {
 	  UserVO vo = (UserVO) obj;
 	  logger.info("logout.................................2");
 	  session.removeAttribute("login");
+	  
+	  session.setMaxInactiveInterval(1);
+	  
 	  session.invalidate();
 
 	  logger.info("logout.................................3");

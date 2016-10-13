@@ -53,7 +53,7 @@ public class HomeController {
     
     model.addAttribute("result", "DOB RESULT");
     
-    return "home";
+    return "doB";
   }  
   
 
