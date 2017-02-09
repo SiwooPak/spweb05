@@ -174,8 +174,9 @@ $(".uploadedList").on("click",  ".delbtn" ,function(event){
 	   data: {fileName:$(this).attr("href")},
 	   dataType:"text",
 	   success:function(result){
+		   console.log("RESULT: " + result);
 		   if(result == 'deleted'){
-			   that.parent("li").remove();
+			   that.closest("li").remove();
 		   }
 	   }
   });
