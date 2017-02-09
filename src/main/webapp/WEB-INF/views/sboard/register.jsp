@@ -160,6 +160,9 @@ $("#registerForm").submit(function(event){
 
 
 
+
+
+
 $(".uploadedList").on("click",  ".delbtn" ,function(event){
 
   event.preventDefault();
