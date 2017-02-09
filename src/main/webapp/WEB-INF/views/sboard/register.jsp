@@ -175,7 +175,7 @@ $(".uploadedList").on("click",  ".delbtn" ,function(event){
 	   dataType:"text",
 	   success:function(result){
 		   if(result == 'deleted'){
-			   that.parent("div").remove();
+			   that.parent("li").remove();
 		   }
 	   }
   });
