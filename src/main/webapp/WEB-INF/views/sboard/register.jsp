@@ -158,13 +158,15 @@ $("#registerForm").submit(function(event){
 });
 
 
+
+
 $(".uploadedList").on("click",  ".delbtn" ,function(event){
 
   event.preventDefault();
 	
   var that = $(this);
   
-  alert("DELETE FILE");
+  //alert("DELETE FILE");
 
   $.ajax({
 	   url:"/deleteFile",
