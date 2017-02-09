@@ -425,7 +425,7 @@ $(document).ready(function(){
 			$.post("/deleteAllFiles",{files:arr}, function(){
 				
 				formObj.attr("action", "/sboard/removePage");
-				formObj.submit();
+				//formObj.submit();
 				
 			});
 		}else{
