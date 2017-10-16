@@ -37,10 +37,6 @@
 <form id='loginForm' action="/user/loginPost" method="post">
 
 
-	<input type="hidden" id="RSAModulus" value="${RSAModulus}" /><!-- 서버에서 전달한값을 셋팅한다. -->
-	<input type="hidden" id="RSAExponent" value="${RSAExponent}" /><!-- 서버에서 전달한값을 셋팅한다. -->
-
-
   <div class="form-group has-feedback">
     <input type="text" name="uid" class="form-control" placeholder="USER ID"/>
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -74,10 +70,7 @@
     <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     
 <!-- 순서에 유의 -->
-<script type="text/javascript" src="/resources/js/rsa.js"></script>
-<script type="text/javascript" src="/resources/js/jsbn.js"></script>
-<script type="text/javascript" src="/resources/js/prng4.js"></script>
-<script type="text/javascript" src="/resources/js/rng.js"></script>
+<script type="text/javascript" src="/resources/js/sha256.js"></script>
     
     <!-- Bootstrap 3.3.2 JS -->
     <script src="/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -90,18 +83,6 @@
     		
     		e.preventDefault(); 
     		
-    		var rsa = new RSAKey();
-    		 rsa.setPublic($('#RSAModulus').val(),$('#RSAExponent').val());
-
-    		console.log($("input[name='uid']").val());
-    		console.log($("input[name='upw']").val());
-    		
-    		//사용자 계정정보를 암호화 처리
-    	 	var enuid = rsa.encrypt($("input[name='uid']").val());
-    		var enpwd = rsa.encrypt($("input[name='upw']").val()); 
-
-    		$("input[name='uid']").val(enuid);
-    		$("input[name='upw']").val(enpwd);
     		
     		
 			$("#loginForm").submit();

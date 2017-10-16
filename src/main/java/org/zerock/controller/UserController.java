@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import org.springframework.web.util.WebUtils;
 import org.zerock.domain.UserVO;
 import org.zerock.dto.LoginDTO;
 import org.zerock.service.UserService;
+import org.zerock.util.SHAUtil;
 
 @Controller
 @RequestMapping("/user")
@@ -51,14 +54,6 @@ public class UserController {
 
   @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
   public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception {
-
-	System.out.println("===============================");
-	System.out.println("CONTROLLER: "+ session.getAttribute("deuid"));
-	System.out.println("CONTROLLER: "+ session.getAttribute("deupw"));
-	System.out.println("===============================");
-	
-	dto.setUid((String)session.getAttribute("deuid"));
-	dto.setUpw((String)session.getAttribute("deupw"));
 	  
     UserVO vo = service.login(dto);
 
@@ -108,5 +103,27 @@ public class UserController {
 
 	  return "user/logout";
   }
+  
+  @RequestMapping(value = "/join", method = RequestMethod.GET)
+  public void joinGET() {
+	  
+  }
+  
+  @RequestMapping(value = "/join", method = RequestMethod.POST)
+  public String joinPOST(UserVO vo) throws Exception{
+
+	  String salt = SHAUtil.generateSalt();
+      String newPassword = SHAUtil.getEncrypt(vo.getUpw(), salt);
+      
+      vo.setUpw(newPassword);
+      vo.setSalt(salt);
+      
+      service.join(vo);
+      
+      return "redirect:/user/login";
+      
+  }
+  
+
   
 }

@@ -83,24 +83,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
       session.removeAttribute(LOGIN);
     }
     
-    String enuid = request.getParameter("uid");
-    String enupw = request.getParameter("upw");
-    
-    
-    PrivateKey privateKey = (PrivateKey) session.getAttribute("_RSA_WEB_Key_");
-
-    
- // 복호화
-    String deuid = decryptRsa(privateKey, enuid);
-    String deupw = decryptRsa(privateKey, enupw);
-    
-    System.out.println("deuid: " + deuid);
-    System.out.println("deupw: " + deupw);
-    
-    session.setAttribute("deuid", deuid);
-    session.setAttribute("deupw", deupw);
-    
-    System.out.println(handler);
     
     return true;
   }

@@ -2,45 +2,57 @@ package org.zerock.domain;
 
 public class UserVO {
 
-  private String uid;
-  private String upw;
-  private String uname;
-  private int upoint;
+	private String uid;
+	private String upw;
+	private String uname;
+	private int upoint;
 
-  public String getUid() {
-    return uid;
-  }
+	public String getSalt() {
+		return salt;
+	}
 
-  public void setUid(String uid) {
-    this.uid = uid;
-  }
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 
-  public String getUpw() {
-    return upw;
-  }
+	private String salt;
 
-  public void setUpw(String upw) {
-    this.upw = upw;
-  }
+	public String getUid() {
+		return uid;
+	}
 
-  public String getUname() {
-    return uname;
-  }
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
-  public void setUname(String uname) {
-    this.uname = uname;
-  }
+	public String getUpw() {
+		return upw;
+	}
 
-  public int getUpoint() {
-    return upoint;
-  }
+	public void setUpw(String upw) {
+		this.upw = upw;
+	}
 
-  public void setUpoint(int upoint) {
-    this.upoint = upoint;
-  }
+	public String getUname() {
+		return uname;
+	}
 
-  @Override
-  public String toString() {
-    return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + "]";
-  }
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public int getUpoint() {
+		return upoint;
+	}
+
+	public void setUpoint(int upoint) {
+		this.upoint = upoint;
+	}
+
+	@Override
+	public String toString() {
+		return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + ", salt=" + salt
+				+ "]";
+	}
+
 }
