@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -51,6 +52,14 @@ public class UserController {
   @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
   public void loginPOST(LoginDTO dto, HttpSession session, Model model) throws Exception {
 
+	System.out.println("===============================");
+	System.out.println("CONTROLLER: "+ session.getAttribute("deuid"));
+	System.out.println("CONTROLLER: "+ session.getAttribute("deupw"));
+	System.out.println("===============================");
+	
+	dto.setUid((String)session.getAttribute("deuid"));
+	dto.setUpw((String)session.getAttribute("deupw"));
+	  
     UserVO vo = service.login(dto);
 
     if (vo == null) {
@@ -99,5 +108,5 @@ public class UserController {
 
 	  return "user/logout";
   }
-
+  
 }

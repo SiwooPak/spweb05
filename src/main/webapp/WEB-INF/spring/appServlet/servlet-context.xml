@@ -41,8 +41,15 @@
 	<beans:bean id="authInterceptor" class="org.zerock.interceptor.AuthInterceptor"></beans:bean>
 
 	<beans:bean id="loginInterceptor" class="org.zerock.interceptor.LoginInterceptor"></beans:bean>
+	
+	<beans:bean id="rsaInterceptor" class="org.zerock.interceptor.RSAInterceptor"></beans:bean>
 
 	<interceptors>
+	
+		<interceptor>
+			<mapping path="/user/login" />
+			<beans:ref bean="rsaInterceptor" />
+		</interceptor>
 	
 		<interceptor>
 			<mapping path="/user/loginPost" />
